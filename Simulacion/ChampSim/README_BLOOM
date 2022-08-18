@@ -1,0 +1,88 @@
+
+
+#Ejecutar programa para lanzar las simulaciones del filtro Bloom
+
+- ./init_BloomSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs BrainAddress
+	Warmup_inst/Simulation_inst -> Número de instrucciones simuladas
+	File_tracelocation -> Archivo donde se encuentran listadas las trazas a ejecutar. La primera línea indica el path y el resto de líneas el nombre de la traza.
+	File_csv -> Nombre del archivo CSV donde se escribirán los resultados (Nombre,TP,FP,TN,FN ,acuraccy, tasas LLC, ciclos)
+	File_simulations -> Archivo que contiene el nombre representativo (1 por línea) de las simulaciones a realizar
+						B-TamañoKB-numHashesH-porcentaje
+						A2-TamañoKB(DE AMBOS)-numHashesH-porcentaje
+						SBF-TamañoKB-BitsporEntradab-numHashesH-B2 
+						SR-TamañoKB-numHashesH-0 
+	nnum_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+	BrainAddress -> Número de direcciones que recuerda Brain
+	Ejemplo de uso: ./init_BloomSimulations 0 1000000000 BloomSimulations.txt TracesLocation.txt A2-B_1B_ 80 320000
+					Generará un archivo .csv con el nombre A2-B_1B_NombreTraza.csv.
+					Las trazas a ejecutar están en el archivo TracesLocation.txt cuya primera línea es el path de las trazas. 
+					Ejecuta las simulaciones, en tandas de 80, indicadas en BloomSimulations.txt con un Brain que recuerda las ultimas 32000 direcciones
+					
+#Ejecutar programa para lanzar el análisis de sensibilidad de Brain
+
+- ./init_BrainSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs 
+	Warmup_inst/Simulation_inst -> Número de instrucciones simuladas 
+	File_tracelocation -> Archivo donde se encuentran listadas las trazas a ejecutar. La primera línea indica el path y el resto de líneas el nombre de la traza.
+	File_csv -> Nombre del archivo CSV donde se escribirán los resultados de cada tamaño de Brain (nombre traza, instrucciones, accesos a llc, ciclos, fallos en llc, nº positivos/negativos clasificados)
+	File_simulations -> Archivo que contiene el número de direcciones que se desea que Brain recuerde
+	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+	Ejemplo de uso: ./init_simulations 0 500000000 BrainSimulations.txt TracesLocation.txt Brain_500M.csv 83
+					Generará un archivo .csv con el nombre Brain_500M
+					Las trazas a ejecutar están en el archivo TracesLocation.txt cuya primera línea es el path de las trazas 
+					Ejecuta las simulaciones, en tandas de 83, indicadas en BrainSimulations.txt.
+
+#Ejecutar programa para lanzar el análisis de ReD
+
+- ./init_ReDSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs 
+	Warmup_inst/Simulation_inst -> Número de instrucciones simuladas
+	File_tracelocation -> Archivo donde se encuentran listadas las trazas a ejecutar. La primera línea indica el path y el resto de líneas el nombre de la traza.
+	File_csv -> Nombre del archivo CSV donde se escribirán los resultados por cada tamaño de Brain (nombre traza, instrucciones, accesos a llc, ciclos, fallos en llc, nº positivos/negativos/falsos positivos/falsos negativos)
+	File_simulations -> Archivo que contiene el número de direcciones que recuerda Brain
+	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+	Ejemplo de uso: ./init_simulations 0 500000000 BrainSimulations.txt TracesLocation.txt ReD_500M.csv 83
+					Generará un archivo .csv con el nombre ReD_500M
+					Las trazas a ejecutar están en el archivo TracesLocation.txt cuya primera línea es el path de las trazas 
+					Ejecuta las simulaciones, en tandas de 83, indicadas en BrainSimulations.txt, que contiene el/los tamaño de Brain.
+
+#Ejecutar programa para lanzar las simulaciones del filtro Bloom-Multicore
+
+- ./init_MultiBloomSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs BrainAddress
+	Warmup_inst/Simulation_inst -> Número de instrucciones simuladas
+	File_tracelocation ->Archivo donde se encuentran listadas las trazas multicore a ejecutar. La primera línea indica el path y el resto de líneas tienen el siguiente formato: número de mezcla;traza_core1;traza_core2;traza_core3;traza_core4.
+	File_csv -> Nombre del archivo CSV donde se escribirán los resultados por cada mezcla y core (número de mezcla, instrucciones, accesos a llc, aciertos en llc, fallos en llc y ciclos)
+	File_simulations -> Archivo que contiene el nombre representativo (1 por línea) de las simulaciones a realizar
+						B-TamañoKB-numHashesH-porcentaje
+						A2-TamañoKB(DE AMBOS)-numHashesH-porcentaje
+						SBF-TamañoKB-BitsporEntradab-numHashesH-B2 
+						SR-TamañoKB-numHashesH-0  
+	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+	BrainAddress -> Número de direcciones que recuerda Brain
+	Ejemplo de uso: ./init_BloomSimulations 0 500000000 BloomSimulations.txt TracesLocation.txt A2-B_1B_ 80 320000
+					Generará un archivo .csv con el nombre A2-B_1B_NombreTraza.csv.
+					Las trazas a ejecutar están en el archivo TracesLocation.txt cuya primera línea es el path de las trazas. 
+					Ejecuta las simulaciones, en tandas de 80, indicadas en BloomSimulations.txt con un Brain que recuerda las ultimas 32000 direcciones
+
+#Ejecutar programa para lanzar el análisis de ReD-Multicore
+
+- ./init_MultiReDSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs 
+	Warmup_inst/Simulation_inst -> Número de instrucciones 
+	File_tracelocation -> Archivo donde se encuentran listadas las trazas multicore a ejecutar. La primera línea indica el path y el resto de líneas tienen el siguiente formato: número de mezcla;traza_core1;traza_core2;traza_core3;traza_core4.
+	File_csv -> Nombre del archivo CSV donde se escribirán los resultados por cada tamaño de brain y core (número de mezcla, instrucciones, accesos a llc, fallos en llc y ciclos)
+				Ej: ReD.csv
+	File_simulations -> Archivo que contiene el número de direcciones que almacena el Brain
+	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+	Ejemplo de uso: ./init_ReDsimulations 0 500000000 BrainSimulations.txt TracesLocation.txt ReD_500M.csv 83
+					Generará un archivo .csv con el nombre ReD_500M
+					Las trazas a ejecutar están en el archivo TracesLocation.txt 
+					Ejecuta las simulaciones, en tandas de 83, indicadas en BrainSimulations.txt, que contiene el/los tamaño de Brain.
+
+			
+#Champsim
+
+- bin/champsim --warmup_instructions (nº inst) --simulation_instructions (nº inst) tracer/(nombre de la traza) --bloom_type A2/SBF/B/SR
+ --P (Prob borrado en A2 o básico o nº celdas borradas aleatoriamente en SBF) --nHash (Nº hashes) --Size (Nº entradas del filtro) 
+ --Max (Valor máximo de las celdas, 0 en caso de A2 y B) --Pipe (nº del descriptor de fichero de la tubería con el padre) --BrainAddress 
+ (Número de las direcciones que recuerda)
+	
+	Ejemplo base: 
+	bin/champsim --warmup_instructions 20000000 --simulation_instructions 20000000 tracer/462.libquantum-1343B.champsimtrace.xz 
