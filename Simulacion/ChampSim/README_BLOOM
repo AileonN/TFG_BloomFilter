@@ -7,11 +7,11 @@
 	File_tracelocation -> Archivo donde se encuentran listadas las trazas a ejecutar. La primera línea indica el path y el resto de líneas el nombre de la traza.
 	File_csv -> Nombre del archivo CSV donde se escribirán los resultados (Nombre,TP,FP,TN,FN ,acuraccy, tasas LLC, ciclos)
 	File_simulations -> Archivo que contiene el nombre representativo (1 por línea) de las simulaciones a realizar
-						B-TamañoKB-numHashesH-porcentaje
-						A2-TamañoKB(DE AMBOS)-numHashesH-porcentaje
-						SBF-TamañoKB-BitsporEntradab-numHashesH-B2 
-						SR-TamañoKB-numHashesH-0 
-	nnum_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
+						B-(Tamaño total)KB-(numero de hashes)H-porcentaje_de_llenado
+						A2-(Tamaño total)KB-(numero de hashes)H-porcentaje_de_llenado
+						SBF-(Tamaño total)KB-(BitsporEntrada)b-(numero de hashes)H-B(número de celdas borradas) 
+						SR-(Tamaño total)KB-(numero de hashes)H-0 
+	nnum_childs -> Número máximo de simulaciones lanzadas por el programa al mismo tiempo
 	BrainAddress -> Número de direcciones que recuerda Brain
 	Ejemplo de uso: ./init_BloomSimulations 0 1000000000 BloomSimulations.txt TracesLocation.txt A2-B_1B_ 80 320000
 					Generará un archivo .csv con el nombre A2-B_1B_NombreTraza.csv.
@@ -51,10 +51,10 @@
 	File_tracelocation ->Archivo donde se encuentran listadas las trazas multicore a ejecutar. La primera línea indica el path y el resto de líneas tienen el siguiente formato: número de mezcla;traza_core1;traza_core2;traza_core3;traza_core4.
 	File_csv -> Nombre del archivo CSV donde se escribirán los resultados por cada mezcla y core (número de mezcla, instrucciones, accesos a llc, aciertos en llc, fallos en llc y ciclos)
 	File_simulations -> Archivo que contiene el nombre representativo (1 por línea) de las simulaciones a realizar
-						B-TamañoKB-numHashesH-porcentaje
-						A2-TamañoKB(DE AMBOS)-numHashesH-porcentaje
-						SBF-TamañoKB-BitsporEntradab-numHashesH-B2 
-						SR-TamañoKB-numHashesH-0  
+						B-(Tamaño total)KB-(numero de hashes)H-porcentaje_de_llenado
+						A2-(Tamaño total)KB-(numero de hashes)H-porcentaje_de_llenado
+						SBF-(Tamaño total)KB-(BitsporEntrada)b-(numero de hashes)H-B(número de celdas borradas) 
+						SR-(Tamaño total)KB-(numero de hashes)H-0  
 	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
 	BrainAddress -> Número de direcciones que recuerda Brain
 	Ejemplo de uso: ./init_BloomSimulations 0 500000000 BloomSimulations.txt TracesLocation.txt A2-B_1B_ 80 320000
@@ -65,10 +65,9 @@
 #Ejecutar programa para lanzar el análisis de ReD-Multicore
 
 - ./init_MultiReDSimulations warmup_inst simulation_inst file_simulations file_tracelocation file_csv num_childs 
-	Warmup_inst/Simulation_inst -> Número de instrucciones 
+	Warmup_inst/Simulation_inst -> Número de instrucciones simuladas
 	File_tracelocation -> Archivo donde se encuentran listadas las trazas multicore a ejecutar. La primera línea indica el path y el resto de líneas tienen el siguiente formato: número de mezcla;traza_core1;traza_core2;traza_core3;traza_core4.
 	File_csv -> Nombre del archivo CSV donde se escribirán los resultados por cada tamaño de brain y core (número de mezcla, instrucciones, accesos a llc, fallos en llc y ciclos)
-				Ej: ReD.csv
 	File_simulations -> Archivo que contiene el número de direcciones que almacena el Brain
 	num_childs -> Número máximo número de simulaciones lanzadas por el programa al mismo tiempo
 	Ejemplo de uso: ./init_ReDsimulations 0 500000000 BrainSimulations.txt TracesLocation.txt ReD_500M.csv 83
